@@ -1,7 +1,9 @@
-import 'package:bd_tour_firebase_admin/page/mainpage.dart';
+// import 'package:bd_tour_firebase_admin/page/mainpage/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../model/tour_model.dart';
 
 class DetailsTourWidget extends StatefulWidget {
   const DetailsTourWidget({super.key, required this.tourModel});

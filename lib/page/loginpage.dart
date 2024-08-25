@@ -71,12 +71,13 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                               fontWeight: FontWeight.w900,
                               color: Colors.black),
                         ),
-
                         const SizedBox(
                           height: 15,
                         ),
                         _buildLoginForm(),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         _buildLoginButton(),
                       ],
                     ),

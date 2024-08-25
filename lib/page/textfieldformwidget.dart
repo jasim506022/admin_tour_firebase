@@ -15,7 +15,7 @@ class TextFieldFormWidget extends StatefulWidget {
       this.textInputAction = TextInputAction.next,
       this.maxLines = 1,
       this.textInputType = TextInputType.text,
-      required this.validator,
+        this.validator,
       this.icon});
 
   final String hintText;
@@ -29,7 +29,7 @@ class TextFieldFormWidget extends StatefulWidget {
   final bool? isShowPassword;
   final String? icon;
 
-  final String? Function(String?)? validator;
+  String? Function(String?)? validator;
 
   @override
   State<TextFieldFormWidget> createState() => _TextFieldFormWidgetState();

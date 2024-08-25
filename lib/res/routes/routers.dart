@@ -1,9 +1,9 @@
-import 'package:bd_tour_firebase_admin/const/dashboard_screen.dart';
-import 'package:bd_tour_firebase_admin/page/mainpage.dart';
-import 'package:bd_tour_firebase_admin/res/routes/routes_name.dart';
-import 'package:bd_tour_firebase_admin/widget/dashboard_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../page/dashboard/dashboard_screen.dart';
+import '../../page/main/main_page.dart';
+import '../../page/add_tour/add_tour_screen.dart';
+import 'routes_name.dart';
 
 class Routers {
   static final GoRouter goRoute =
@@ -26,21 +26,21 @@ class Routers {
       path: RoutesName.addTourScreen,
       name: "addTourScreen",
       builder: (context, state) => const MainPage(
-        child: DashboardWidget(),
+        child: AddTourScreen(),
       ),
     ),
     GoRoute(
       path: RoutesName.tourScreen,
       name: "tourScreen",
       builder: (context, state) => const MainPage(
-        child: DashboardWidget(),
+        child: AddTourScreen(),
       ),
     ),
     GoRoute(
       path: RoutesName.addScreen,
       name: "addScreen",
       builder: (context, state) => const MainPage(
-        child: DashboardWidget(),
+        child: AddTourScreen(),
       ),
     ),
     GoRoute(
@@ -51,19 +51,6 @@ class Routers {
       ),
     ),
   ]);
-}
-
-enum SidebarItem {
-  dashboardScreen(value: 'Dashboard', iconData: Icons.dashboard),
-  addTourScreen(value: 'Add Tour', iconData: Icons.business),
-  tourScreen(value: 'Tour', iconData: Icons.group),
-  addScreen(value: 'Add', iconData: Icons.campaign),
-  imageScreen(value: 'Image', iconData: Icons.settings);
-
-  const SidebarItem({required this.value, required this.iconData});
-
-  final String value;
-  final IconData iconData;
 }
 
 List<String> listString = [
