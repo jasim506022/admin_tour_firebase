@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../const/gobalcolor.dart';
+import '../res/apps_colors.dart';
+
 
 class TextFormTitleWidget extends StatelessWidget {
   const TextFormTitleWidget({

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../const/gobalcolor.dart';
+import '../res/apps_colors.dart';
 
 class TextFieldFormWidget extends StatefulWidget {
   TextFieldFormWidget(
@@ -72,14 +71,6 @@ class _TextFieldFormWidgetState extends State<TextFieldFormWidget> {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              // prefixIcon: Padding(
-              //   padding: const EdgeInsets.all(4),
-              //   child: SvgPicture.asset(
-              //    widget.icon??"asset/svg/email1.svg",
-              //     height: 35,
-              //     width: 35,
-              //   ),
-              // ),
               suffixIcon: widget.isShowPassword!
                   ? IconButton(
                       onPressed: () {

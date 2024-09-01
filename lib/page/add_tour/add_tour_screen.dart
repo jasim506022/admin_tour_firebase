@@ -1,26 +1,54 @@
+import 'package:bd_tour_firebase_admin/model/tour_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
 
 import '../../controller/add_tour_controller.dart';
 import '../../controller/main_page_controller.dart';
+import '../../res/apps_colors.dart';
 import '../responsive.dart';
 import '../textfieldformwidget.dart';
 import '../textform_title_widget.dart';
 import 'image_list_grid.dart';
 
 class AddTourScreen extends StatefulWidget {
-  const AddTourScreen({super.key});
+  const AddTourScreen({super.key, this.data});
+
+  final Map<String, dynamic>? data;
 
   @override
   State<AddTourScreen> createState() => _AddTourScreenState();
 }
 
 class _AddTourScreenState extends State<AddTourScreen> {
+  bool isUpdate = false;
   var controllers = Get.put(AddTourController());
+  late TourModel tourModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(widget.data != null){
+      isUpdate = widget.data!["isUdpate"];
+    }
+
+    if (isUpdate) {
+      print(isUpdate);
+      print("Bangladehs");
+      tourModel = widget.data!["tourModel"];
+      controllers
+        ..tourId.value = tourModel.id!
+        ..titleController.text = tourModel.name ?? ""
+        ..priceController.text = tourModel.price.toString()
+        ..ratingController.text = tourModel.ratting.toString()
+        ..addressController.text = tourModel.address ?? ""
+        ..detailsController.text = tourModel.details ?? ""
+        ..imageXFileList.assignAll(tourModel.imageList?.cast<dynamic>() ?? []);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +101,22 @@ class _AddTourScreenState extends State<AddTourScreen> {
               height: 20,
             ),
             _buildAddTourForm(),
-
             ElevatedButton(
               style: buildButtonStyle(),
               onPressed: () async {
-                controllers.uploadNewTour(
-                    selectedValue: controllers.selectedCategory.value,
-                    context: context);
+                controllers.saveToru(selectedValue: controllers.selectedCategory.value,
+                    context: context, isUpdate: isUpdate);
+                // if(isUpdate){
+                //   controllers.updateTour(
+                //       selectedValue: controllers.selectedCategory.value,
+                //       context: context);
+                // }
+                // else{
+                //   controllers.uploadNewTour(
+                //       selectedValue: controllers.selectedCategory.value,
+                //       context: context);
+                // }
+
               },
               child: const Text(
                 "Upload Tour",
@@ -133,7 +170,7 @@ class _AddTourScreenState extends State<AddTourScreen> {
             ),
           Center(
             child: Text(
-              "Add New Tour",
+              isUpdate ? "Update Tour" : "Add New Tour",
               style: GoogleFonts.poppins(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

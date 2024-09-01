@@ -1,3 +1,6 @@
+import 'package:bd_tour_firebase_admin/page/login/login_page.dart';
+import 'package:bd_tour_firebase_admin/page/tour/tour_screen.dart';
+import 'package:bd_tour_firebase_admin/page/users/userscreen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../page/dashboard/dashboard_screen.dart';
@@ -7,19 +10,33 @@ import 'routes_name.dart';
 
 class Routers {
   static final GoRouter goRoute =
-      GoRouter(initialLocation: RoutesName.mainPage, routes: [
+      GoRouter(initialLocation: RoutesName.initialRoute, routes: [
     GoRoute(
-      path: RoutesName.mainPage,
-      name: "mainPage",
+      path: RoutesName.initialRoute,
+      name: RoutesName.initialRoute,
+      builder: (context, state) => const LogInPage(
+          // child: UserScreen(),
+          ),
+    ),
+        GoRoute(
+          path: RoutesName.mainPage,
+          name: RoutesName.mainPage,
+          builder: (context, state) => const MainPage(
+            child: DashboardScreen(),
+          ),
+        ),
+    GoRoute(
+      path: RoutesName.dashboardScreen,
+      name: RoutesName.dashboardScreen,
       builder: (context, state) => const MainPage(
         child: DashboardScreen(),
       ),
     ),
     GoRoute(
-      path: RoutesName.dashboardScreen,
-      name: "dashboardScreen",
+      path: RoutesName.userScreen,
+      name: "userScreen", //"dashboardScreen",
       builder: (context, state) => const MainPage(
-        child: DashboardScreen(),
+        child: UserScreen(),
       ),
     ),
     GoRoute(
@@ -30,19 +47,23 @@ class Routers {
       ),
     ),
     GoRoute(
-      path: RoutesName.tourScreen,
-      name: "tourScreen",
-      builder: (context, state) => const MainPage(
-        child: AddTourScreen(),
-      ),
-    ),
+        path: RoutesName.tourScreen,
+        name: "tourScreen",
+        builder: (context, state) {
+          return const MainPage(
+            child: TourScreen(),
+          );
+        }),
     GoRoute(
-      path: RoutesName.addScreen,
-      name: "addScreen",
-      builder: (context, state) => const MainPage(
-        child: AddTourScreen(),
-      ),
-    ),
+        path: RoutesName.addScreen,
+        name: "addScreen",
+        builder: (context, state) {
+          final data =
+              state.extra != null ? state.extra as Map<String, dynamic> : null;
+          return MainPage(
+            child: AddTourScreen(data: data),
+          );
+        }),
     GoRoute(
       path: RoutesName.imageScreen,
       name: "imageScreen",

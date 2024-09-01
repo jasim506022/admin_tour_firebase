@@ -2,37 +2,29 @@
 // import 'package:bd_tour_firebase/widget/custom_button_widget.dart';
 // import 'package:connectivity/connectivity.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:lottie/lottie.dart';
 
-// import '../page/widget/button.dart';
-// import '../res/assets/animation_assets.dart';
-// import '../res/routes/routes_name.dart';
-// import '../widget/show_error_dialog_widget.dart';
+
+import '../res/apps_colors.dart';
 import 'const.dart';
-import 'gobalcolor.dart';
 
 class GlobalMethod {
-  /*
-  Future<bool> internetChecking() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    return connectivityResult == ConnectivityResult.none;
-  }
 
-   */
+  // Future<bool> internetChecking() async {
+  //   var connectivityResult = await Connectivity().checkConnectivity();
+  //   return connectivityResult == ConnectivityResult.none;
+  // }
+
+
 
   // Email Valid
-  bool isValidEmail(String email) {
-    String emailRegex = r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)*[a-zA-Z]{2,7}$';
-    RegExp regex = RegExp(emailRegex);
-    return regex.hasMatch(email);
-  }
+
 
   /*
   // Flutter Toast
@@ -49,7 +41,8 @@ class GlobalMethod {
    */
 
   // Build Tab
-  Tab buildTab({required String title}) {
+  Tab buildTab({required String title, required BuildContext context}) {
+    var mq = MediaQuery.of(context).size;
     return Tab(
       child: SizedBox(
         width: mq.width,
@@ -93,7 +86,7 @@ class GlobalMethod {
             ),
             if (content != null)
               Text(
-                content!,
+                content,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.sourceSerif4(fontSize: 16),
               ),
@@ -126,35 +119,32 @@ class GlobalMethod {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: secondaryColor,
-          content: Container(
-            // color: AppColors.secondaryColor,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 150,
-                  width: 150,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    backgroundColor: AppColors.deepGreen,
-                    strokeWidth: 10,
-                  ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 150,
+                width: 150,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  backgroundColor: AppColors.deepGreen,
+                  strokeWidth: 10,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                      color: AppColors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                title,
+                style: GoogleFonts.poppins(
+                    color: AppColors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
           ),
         );
       },

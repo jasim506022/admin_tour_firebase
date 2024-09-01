@@ -12,7 +12,16 @@ abstract class BaseFirebaseService {
 
   FirebaseFirestore get firestore;
 
-  Future<List<String>> uploadImageStorage({required List<XFile> imageList});
+  Future<UserCredential> signWithEmailPassword({required String email, required String password});
 
+  Future<List<String>> uploadImageStorage({required List<XFile> imageList});
   Future<void> uploadTourSnapshot({required TourModel tourModel});
+  // Query Documentation
+  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot();
+
+  Future<void> deleteTour({required String id});
+  Future<void> updateTour({required TourModel tourModel});
+
+
+
 }

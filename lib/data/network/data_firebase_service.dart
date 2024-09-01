@@ -58,9 +58,36 @@ Future<List<String>> uploadImageStorage({required List<XFile> imageList}) async 
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
 
   @override
-  Future<void> uploadTourSnapshot(
-      {required TourModel tourModel}) async {
+  Future<void> uploadTourSnapshot({required TourModel tourModel}) async {
     firestore.collection("tours").doc(tourModel.id).set(tourModel.toMap());
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot() {
+    return firestore
+        .collection("tours")
+        .orderBy("id", descending: true)
+        .snapshots();
+  }
+
+  @override
+  Future<void> deleteTour({required String id}) async {
+    await firestore.collection("tours").doc(id).delete();
+  }
+
+  @override
+  Future<void> updateTour({required TourModel tourModel}) async {
+    // TODO: implement updateTour
+    await firestore
+        .collection("tours")
+        .doc(tourModel.id)
+        .update(tourModel.toMap());
+  }
+
+  @override
+  Future<UserCredential> signWithEmailPassword(
+      {required String email, required String password}) {
+    return auth.signInWithEmailAndPassword(email: email, password: password);
   }
 }
 

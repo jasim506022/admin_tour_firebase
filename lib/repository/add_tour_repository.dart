@@ -1,4 +1,3 @@
-
 import 'package:bd_tour_firebase_admin/data/network/data_firebase_service.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,6 +14,10 @@ class AddTourRepository {
   Future<void> uploadTourSnapshot(
       {required TourModel tourModel, required String docId}) async {
     await dataFirebaseService.uploadTourSnapshot(tourModel: tourModel);
+  }
+
+  Future<void> updateTour({required TourModel tourModel}) async {
+    await dataFirebaseService.updateTour(tourModel: tourModel);
   }
 
   Future<List<String>> uploadImageStorage(
