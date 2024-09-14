@@ -1,3 +1,4 @@
+import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -5,9 +6,9 @@ import 'package:get/get.dart';
 import '../../../const/const.dart';
 import '../../controller/login_controller.dart';
 import '../../res/apps_function.dart';
-import '../responsive.dart';
-import '../textfieldformwidget.dart';
-import '../textform_title_widget.dart';
+import '../../widget/responsive.dart';
+import '../../widget/textfieldformwidget.dart';
+import '../../widget/textform_title_widget.dart';
 import 'widget/custom_button_widget.dart';
 
 class LogInPage extends StatefulWidget {
@@ -19,16 +20,23 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var loginController = Get.put(LoginController());
+
+  final LoginController loginController = Get.find();
+  @override
+  void initState() {
+    loginController.navigateToNextPage(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Material(
-        color: bgColor,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Scaffold(
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isMobile(context) ? 10 : 20,
+              vertical: Responsive.isMobile(context) ? 10 : 20),
           child: Center(
             child: SingleChildScrollView(
               child: SizedBox(
@@ -40,9 +48,9 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                   child: Container(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.red, width: 3)),
+                        border: Border.all(color: AppColors.red, width: 3)),
                     child: Column(
                       children: [
                         Text(
@@ -132,6 +140,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
       width: mq.width,
       child: CustomButtonWidget(
         onPressed: () async {
+
           if (!_formKey.currentState!.validate()) return;
           loginController.loginButton(context);
         },

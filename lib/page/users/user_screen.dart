@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../const/const.dart';
+import '../../res/apps_colors.dart';
+import '../../res/constant.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -53,9 +55,9 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.all(defaultPadding),
-        decoration: const BoxDecoration(
-            color: secondaryColor,
+        margin: const EdgeInsets.all(ConstantData.defaultPadding),
+        decoration:  BoxDecoration(
+            color: AppColors.secondaryColor,
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: ListView(
           children: [

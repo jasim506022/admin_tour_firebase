@@ -1,15 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../data/network/data_firebase_service.dart';
+import '../res/apps_function.dart';
 
 class TourRepository {
   var dataFirebaseService = DataFirebaseService();
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot() {
-    return dataFirebaseService.tourSnapshot();
+  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot(
+      {required String category}) {
+    try {
+      return dataFirebaseService.tourSnapshot(category: category);
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> popularSnapshot() {
+    try {
+      return dataFirebaseService.popularSnapshot();
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
   }
 
   Future<void> deleteTour({required String id}) async {
-    await dataFirebaseService.deleteTour(id: id);
+    try {
+      await dataFirebaseService.deleteTour(id: id);
+    } catch (e) {
+      AppsFunction.handleException(e);
+    }
   }
 }

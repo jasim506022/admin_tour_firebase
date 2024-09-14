@@ -1,23 +1,31 @@
-
 import 'package:flutter/material.dart';
 
-import '../../../const/const.dart';
-import '../dashboard_screen.dart';
+import '../../../model/summer_model.dart';
+import '../../../res/apps_colors.dart';
+import '../../../res/constant.dart';
 
-class FileWidget extends StatelessWidget {
-  const FileWidget({
+class SummeryWidget extends StatelessWidget {
+  const SummeryWidget({
     super.key,
     required this.index,
+    required this.title,
+    required this.activeCount,
+    required this.totalCount,
+    required this.percentage,
   });
 
   final int index;
+  final String title;
+  final int activeCount;
+  final int totalCount;
+  final double percentage;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-          color: secondaryColor,
+      padding: const EdgeInsets.all(ConstantData.defaultPadding),
+      decoration:  BoxDecoration(
+          color:AppColors. secondaryColor,
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,19 +35,20 @@ class FileWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.all(defaultPadding * 0.75),
+                padding: const EdgeInsets.all(ConstantData.defaultPadding * 0.75),
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                    color: demoMyFiles[index].color!.withOpacity(0.1),
+                    color: summerList[index].color!.withOpacity(0.1),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: Icon(demoMyFiles[index].icon!),
+                child: Center(child: Icon(summerList[index].icon!)),
               ),
               const Icon(Icons.more_vert, color: Colors.white54)
             ],
           ),
           Text(
-            demoMyFiles[index].title!,
+            // summerList[index].title!,
+            title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -49,18 +58,18 @@ class FileWidget extends StatelessWidget {
                 width: double.infinity,
                 height: 5,
                 decoration: BoxDecoration(
-                    color: demoMyFiles[index].color!.withOpacity(0.1),
+                    color: summerList[index].color!.withOpacity(0.1),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
               ),
               LayoutBuilder(
                 builder: (context, constraints) => Container(
-                  width: constraints.maxWidth *
-                      (demoMyFiles[index].percentage! / 100),
+                  width: constraints.maxWidth * percentage / 100,
+                  // i want to show active percentage
                   height: 5,
                   decoration: BoxDecoration(
-                      color: demoMyFiles[index].color,
+                      color: summerList[index].color,
                       borderRadius:
-                      const BorderRadius.all(Radius.circular(10))),
+                          const BorderRadius.all(Radius.circular(10))),
                 ),
               ),
             ],
@@ -70,9 +79,8 @@ class FileWidget extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  "${demoMyFiles[index].numOfFiles} Files",
+                  "Active: $activeCount",
                   overflow: TextOverflow.ellipsis,
-                  // Adds "..." if text is too long
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -81,9 +89,8 @@ class FileWidget extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  demoMyFiles[index].totalStorage!,
+                  "Total $totalCount",
                   overflow: TextOverflow.ellipsis,
-                  // Adds "..." if text is too long
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!

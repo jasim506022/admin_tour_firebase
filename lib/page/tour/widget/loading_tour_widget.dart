@@ -1,5 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../const/const.dart';
+import '../../../res/apps_colors.dart';
+import '../../../res/constant.dart';
 
 class LoadingTourWidget extends StatelessWidget {
   const LoadingTourWidget({super.key});
@@ -9,122 +14,106 @@ class LoadingTourWidget extends StatelessWidget {
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(20),
-      color: const Color(0xFF2F3143),
+      color: AppColors.tourCardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
         margin: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Shimmer for the image placeholder
-            ShimmerPlaceHolder(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * .3,
-            ),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade200,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Shimmer for the image placeholder
+              _buildShimmer(
+                width: mq.width,
+                height: mq.height * .3,
+              ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const ShimmerPlaceHolder(
-                  height: 20,
-                  width: 45,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: ShimmerPlaceHolder(
-                    width: MediaQuery.of(context).size.width,
-                    height: 15,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildShimmer(
+                    height: 20,
+                    width: 45,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-
-            const ShimmerPlaceHolder(
-              height: 10,
-              width: 100,
-            ),
-            const SizedBox(height: 20),
-            ShimmerPlaceHolder(
-              height: 18,
-              width: MediaQuery.of(context).size.width,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ShimmerPlaceHolder(
-              height: 18,
-              width: MediaQuery.of(context).size.width,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ShimmerPlaceHolder(
-              height: 18,
-              width: MediaQuery.of(context).size.width,
-            ),
-            const SizedBox(height: 15),
-
-            ShimmerPlaceHolder(
-              height: 12,
-              width: MediaQuery.of(context).size.width,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Row(
-              children: [
-                Expanded(
-                  child: ShimmerPlaceHolder(
-                    height: 40,
-                    width: 100,
-                    // color: Colors.grey.shade300,
+                  const SizedBox(
+                    width: ConstantData.defaultPadding,
                   ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: ShimmerPlaceHolder(
-                    height: 40,
-                    width: 100,
-                    // color: Colors.grey.shade300,
+                  Expanded(
+                    child: _buildShimmer(
+                      height: ConstantData.defaultPadding,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 10),
+
+              _buildShimmer(
+                height: 10,
+                width: 100,
+              ),
+              const SizedBox(height: 20),
+              _buildShimmer(
+                height: ConstantData.defaultPadding,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _buildShimmer(
+                height: ConstantData.defaultPadding,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _buildShimmer(
+                height: ConstantData.defaultPadding,
+              ),
+              const SizedBox(height: ConstantData.defaultPadding),
+
+              _buildShimmer(
+                height: 12,
+              ),
+              const SizedBox(
+                height: ConstantData.defaultPadding,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildShimmer(
+                      height: 40,
+                      width: 100,
+                      // color: Colors.grey.shade300,
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: _buildShimmer(
+                      height: 40,
+                      width: 100,
+                      // color: Colors.grey.shade300,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-class ShimmerPlaceHolder extends StatelessWidget {
-  const ShimmerPlaceHolder(
-      {super.key, required this.width, required this.height});
-
-  final double width;
-
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade200,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.grey.shade300),
-      ),
+  Container _buildShimmer({double? width, required double height}) {
+    return Container(
+      width: width ?? mq.width,
+      height: height,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5), color: Colors.grey.shade300),
     );
   }
 }

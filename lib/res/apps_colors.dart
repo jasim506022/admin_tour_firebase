@@ -9,7 +9,7 @@ class AppColors {
   static Color blueColor = const Color(0xff4600a1);
 
 // Primary Color
-  static Color secondaryColor = const Color(0xff1d1d1d);
+  static Color secondaryColor = const Color(0xFF2A2D3E);
 
 // State Colors
   static Color lightBlack = const Color(0xff999999);
@@ -26,5 +26,9 @@ class AppColors {
   static Color deepGreen = const Color.fromARGB(255, 0, 108, 57);
   static Color cardColor = const Color(0xff393e4b);
   static Color hintTextColor = const Color(0xffc8c8d5);
+  static Color tourCardColor = const Color(0xFF2F3143);
+  static const backgroundColor = Color(0xFF212332);
+
+  // static  const secondaryColor = Color(0xFF2A2D3E);
 }
 

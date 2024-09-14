@@ -1,10 +1,10 @@
+import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'globalmethod.dart';
 
-GlobalMethod globalMethod = GlobalMethod();
-
+//
 SharedPreferences? sharedPreference;
 
 late Size mq;
@@ -23,21 +23,23 @@ List<String> travelCategories = [
 enum Gender { male, female, other }
 
 const primaryColor = Color(0xFF2697FF);
-const secondaryColor = Color(0xFF2A2D3E);
-const bgColor = Color(0xFF212332);
+// const secondaryColor = Color();
+
 const cardColor = Color(0xFF2E3049);
 
-const defaultPadding = 16.0;
 
-enum SidebarItem {
-  dashboardScreen(value: 'Dashboard', iconData: Icons.dashboard),
-  addTourScreen(value: 'Add Tour', iconData: Icons.business),
-  tourScreen(value: 'Tour', iconData: Icons.group),
-  addScreen(value: 'Add', iconData: Icons.campaign),
-  imageScreen(value: 'Image', iconData: Icons.settings);
 
-  const SidebarItem({required this.value, required this.iconData});
-
-  final String value;
-  final IconData iconData;
-}
+List<DataColumn> columns = [
+  const DataColumn(
+    label: Text("Photo"),
+  ),
+  const DataColumn(
+    label: Text("Tour Name"),
+  ),
+  const DataColumn(
+    label: Text("Price"),
+  ),
+  const DataColumn(
+    label: Text("Location"),
+  ),
+];

@@ -12,10 +12,6 @@ class LoadingController extends GetxController {
     this.isLoading.value = isLoading;
   }
 
-  var selectIndex = SidebarItem.dashboardScreen.value.obs;
 
-  setIndex ({required String index}){
-    selectIndex.value = index;
-  }
 
 }

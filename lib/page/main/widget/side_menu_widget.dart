@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../const/const.dart';
-import '../../../controller/loading_controller.dart';
-
+import '../../../controller/main_page_controller.dart';
+import '../../../controller/save_local.dart';
+import '../../../model/menu_model.dart';
+import '../../../res/apps_colors.dart';
 
 class SideMenuWidget extends StatelessWidget {
   const SideMenuWidget({
@@ -13,9 +15,10 @@ class SideMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoadingController controller = Get.put(LoadingController());
+    final controller = Get.find<MainPageController>();
     return Drawer(
-      backgroundColor: secondaryColor,
+      key: UniqueKey(),
+      backgroundColor:AppColors. secondaryColor,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -25,12 +28,13 @@ class SideMenuWidget extends StatelessWidget {
                 return Obx(
                   () => ListTile(
                     onTap: () {
-                      controller.setIndex(index: item.value);
-                      context.goNamed(item.name);
+                      controller.onChangeState(currentState: item.value);
+                      SaveDataLocalStorage.saveCurrentRouthPath(item.pathName);
+                      context.goNamed(item.value);
                     },
                     leading: Icon(
                       item.iconData,
-                      color: controller.selectIndex.value == item.value
+                      color: controller.currentState.value == item.value
                           ? Colors.yellow
                           : Colors.white54,
                       size: 20,
@@ -38,7 +42,7 @@ class SideMenuWidget extends StatelessWidget {
                     title: Text(
                       item.value,
                       style: TextStyle(
-                        color: controller.selectIndex.value == item.value
+                        color: controller.currentState.value == item.value
                             ? Colors.yellow
                             : Colors.white54,
                       ),
@@ -53,6 +57,3 @@ class SideMenuWidget extends StatelessWidget {
     );
   }
 }
-
-
-

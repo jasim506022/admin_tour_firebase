@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:bd_tour_firebase_admin/data/network/base_firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,12 +12,13 @@ class DataFirebaseService implements BaseFirebaseService {
   // TODO: implement auth
   FirebaseAuth get auth => FirebaseAuth.instance;
 
-  /*
   @override
-Future<List<String>> uploadImageStorage({required List<XFile> imageList}) async {
-  return Future.wait(imageList.map((image) => _postImage(image)));
-}
-   */
+  Future<User?> getCurrentUser() async => auth.currentUser;
+
+  @override
+  Future<DocumentSnapshot<Map<String, dynamic>>> getCategories() async {
+    return firestore.collection("categories").doc("category").get();
+  }
 
   @override
   Future<List<String>> uploadImageStorage(
@@ -63,9 +61,27 @@ Future<List<String>> uploadImageStorage({required List<XFile> imageList}) async 
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot(
+      {required String category}) {
+    return category == "All"
+        ? firestore
+            .collection("tours")
+            .orderBy("id", descending: true)
+            .snapshots()
+        : firestore
+            .collection("tours")
+            .where("category", isEqualTo: category)
+            .orderBy(
+              "category",
+            )
+            .orderBy("id", descending: true)
+            .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> popularSnapshot() {
     return firestore
         .collection("tours")
+        .where("ratting", isGreaterThan: 3.8)
         .orderBy("id", descending: true)
         .snapshots();
   }
@@ -88,6 +104,12 @@ Future<List<String>> uploadImageStorage({required List<XFile> imageList}) async 
   Future<UserCredential> signWithEmailPassword(
       {required String email, required String password}) {
     return auth.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> summerySnapshot(
+      {required String collection}) {
+    return firestore.collection(collection).snapshots();
   }
 }
 

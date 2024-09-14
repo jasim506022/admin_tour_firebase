@@ -9,6 +9,7 @@ class TourModel with ChangeNotifier {
   double? ratting;
   List<String>? imageList;
   String? id;
+  bool? isActive;
   String? category;
 
   TourModel(
@@ -19,6 +20,7 @@ class TourModel with ChangeNotifier {
         this.imageList,
         this.ratting,
         this.id,
+        this.isActive,
         this.category});
 
   Map<String, dynamic> toMap() {
@@ -30,7 +32,8 @@ class TourModel with ChangeNotifier {
       'price': price,
       'ratting': ratting,
       'imageList': imageList,
-      'category': category
+      'category': category,
+      "isActive": isActive
     };
   }
 
@@ -39,6 +42,7 @@ class TourModel with ChangeNotifier {
   factory TourModel.fromMap(Map<String, dynamic> map) {
     return TourModel(
       name: map['name'] != null ? map['name'] as String : null,
+      isActive: map['isActive'] != null ? map["isActive"] as bool : null,
       category: map['category'] != null ? map['category'] as String : null,
       id: map['id'] != null ? map['id'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
