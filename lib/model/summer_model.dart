@@ -1,3 +1,4 @@
+import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -25,7 +26,7 @@ List summerList = [
     numOfFiles: 1328,
     icon: Icons.tour,
     totalStorage: "1.9GB",
-    color: primaryColor,
+    color: AppColors.blueColor,
     percentage: 35,
   ),
   SummerModel(

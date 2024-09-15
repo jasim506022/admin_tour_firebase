@@ -34,7 +34,8 @@ class TourWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         onTap: () {
-          context.goNamed(RoutesName.detailsScreen, extra: tourModel);
+          context.go('/details/${tourModel.id
+          }');
         },
         child: Container(
           margin: const EdgeInsets.all(15),

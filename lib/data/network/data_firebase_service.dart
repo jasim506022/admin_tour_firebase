@@ -111,6 +111,12 @@ class DataFirebaseService implements BaseFirebaseService {
       {required String collection}) {
     return firestore.collection(collection).snapshots();
   }
+
+  @override
+  Future<DocumentSnapshot<Map<String, dynamic>>> singleTourSnapshot(
+      {required String id}) {
+    return firestore.collection('tours').doc(id).get();
+  }
 }
 
 /*

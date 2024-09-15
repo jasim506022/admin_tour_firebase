@@ -24,11 +24,11 @@ class Routers {
       path: RoutesPath.mainPage,
       name: RoutesName.mainPage,
       builder: (context, state) {
-        final GlobalKey<ScaffoldState> dashboardScaffoldKey = GlobalKey<ScaffoldState>();
+        final GlobalKey<ScaffoldState> dashboardScaffoldKey =
+            GlobalKey<ScaffoldState>();
         return MainPage(
           child: DashboardScreen(
-              scaffoldKey: dashboardScaffoldKey
-          ), // Pass scaffoldKey here
+              scaffoldKey: dashboardScaffoldKey), // Pass scaffoldKey here
           scaffoldKey: dashboardScaffoldKey, // Use the same key for MainPage
         );
       },
@@ -37,29 +37,27 @@ class Routers {
       path: RoutesPath.dashboardScreen,
       name: RoutesName.dashboardScreen,
       builder: (context, state) {
-        final GlobalKey<ScaffoldState> dashboardScaffoldKey = GlobalKey<ScaffoldState>();
+        final GlobalKey<ScaffoldState> dashboardScaffoldKey =
+            GlobalKey<ScaffoldState>();
         return MainPage(
-          child: DashboardScreen(scaffoldKey: dashboardScaffoldKey), // Pass scaffoldKey here
+          child: DashboardScreen(scaffoldKey: dashboardScaffoldKey),
+          // Pass scaffoldKey here
           scaffoldKey: dashboardScaffoldKey, // Use the same key for MainPage
         );
       },
     ),
 
-        GoRoute(
-          path: RoutesPath.tourScreen,
-          name: RoutesName.tourScreen, //"dashboardScreen",
-          builder: (context, state) =>  MainPage(
-              child: TourScreen(),
-              scaffoldKey: GlobalKey<ScaffoldState>()
-          ),
-        ),
+    GoRoute(
+      path: RoutesPath.tourScreen,
+      name: RoutesName.tourScreen, //"dashboardScreen",
+      builder: (context, state) => MainPage(
+          child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>()),
+    ),
     GoRoute(
       path: RoutesPath.userScreen,
       name: RoutesName.userScreen, //"dashboardScreen",
-      builder: (context, state) =>  MainPage(
-        child: UserScreen(),
-          scaffoldKey: GlobalKey<ScaffoldState>()
-      ),
+      builder: (context, state) => MainPage(
+          child: UserScreen(), scaffoldKey: GlobalKey<ScaffoldState>()),
     ),
     GoRoute(
         path: RoutesPath.addTourScreen,
@@ -68,37 +66,40 @@ class Routers {
           // final GlobalKey<ScaffoldState> addScaffoldKey = ;
           final data =
               state.extra != null ? state.extra as Map<String, dynamic> : null;
-          return MainPage(child: AddTourScreen(data: data,
+          return MainPage(
+              child: AddTourScreen(
+                data: data,
 
-            // scaffoldKey: GlobalKey<ScaffoldState>(),
-          ),
+                // scaffoldKey: GlobalKey<ScaffoldState>(),
+              ),
               scaffoldKey: GlobalKey<ScaffoldState>());
         }),
     GoRoute(
         path: RoutesPath.searchScreen,
         name: RoutesName.searchScreen,
         builder: (context, state) {
-          return  MainPage(
-            child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>()
-          );
+          return MainPage(
+              child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
         }),
-        GoRoute(
-            path: RoutesPath.profileScreen,
-            name: RoutesName.profileScreen,
-            builder: (context, state) {
-              return  MainPage(
-                  child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>()
-              );
-            }),
-
+    GoRoute(
+        path: RoutesPath.profileScreen,
+        name: RoutesName.profileScreen,
+        builder: (context, state) {
+          return MainPage(
+              child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
+        }),
 
     GoRoute(
-        path: RoutesPath.detailsScreen,
-        name: RoutesName.detailsScreen,
-        builder: (context, state) {
-          TourModel data = state.extra as TourModel;
-          return DetailsTourWidget(tourModel: data);
-        }),
+      path: '/details/:id', // Dynamic path with :id
+      name: RoutesName.detailsScreen,
+      builder: (context, state) {
+        // Get the 'id' from the path parameter
+        final id = state.pathParameters['id'];
+
+        // Pass the id to the widget
+        return DetailsTourWidget(id: id!);
+      },
+    ),
 
     // GoRoute(
     //   path: RoutesPath.userScreen,

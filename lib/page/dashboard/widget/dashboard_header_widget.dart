@@ -164,9 +164,9 @@ class DashboardHeaderWidget extends StatelessWidget {
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(ConstantData.defaultPadding * 0.75),
-            decoration: const BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
+            decoration:  BoxDecoration(
+                color: AppColors.blueColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: const Icon(
               Icons.search,
               size: 20,

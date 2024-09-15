@@ -32,4 +32,14 @@ class TourRepository {
       AppsFunction.handleException(e);
     }
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> singleTourSnapshot(
+      {required String id}) {
+    try {
+      return dataFirebaseService.singleTourSnapshot(id: id);
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
+  }
 }

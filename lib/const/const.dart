@@ -22,7 +22,7 @@ List<String> travelCategories = [
 
 enum Gender { male, female, other }
 
-const primaryColor = Color(0xFF2697FF);
+// const primaryColor = Color(0xFF2697FF);
 // const secondaryColor = Color();
 
 const cardColor = Color(0xFF2E3049);

@@ -15,10 +15,16 @@ class TourController extends GetxController {
   var categoryController = Get.find<CategoryController>();
   final TourRepository repository;
 
+  var currentPhotoIndex = 0.obs;
+
   Map<String, double> categoryDataMap = {};
   Map<String, double> categoryActiveDataMap = {};
 
   TourController({required this.repository});
+
+  void changeImage(int index) {
+    currentPhotoIndex.value = index;
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot(
       {required BuildContext context}) {
@@ -67,6 +73,18 @@ class TourController extends GetxController {
       BuildContext context) {
     try {
       return repository.popularSnapshot();
+    } catch (e) {
+      if (e is AppException) {
+        AppsFunction.showSnackBar(context, e.message!);
+      }
+      rethrow;
+    }
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> singleTourSnapshot(
+      {required String id, required BuildContext context}) {
+    try {
+      return repository.singleTourSnapshot(id: id);
     } catch (e) {
       if (e is AppException) {
         AppsFunction.showSnackBar(context, e.message!);
