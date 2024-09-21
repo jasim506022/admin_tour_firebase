@@ -23,11 +23,12 @@ class CategoryDropDownWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         margin: EdgeInsets.symmetric(horizontal: margin),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: AppColors. secondaryColor),
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.secondaryColor),
         width: mq.width,
         child: DropdownButtonFormField(
           decoration: const InputDecoration(
-              fillColor: Colors.blue, border: InputBorder.none),
+              border: InputBorder.none),
           borderRadius: BorderRadius.circular(15),
           hint: const Text("Select Tour Category"),
           value: isAll!

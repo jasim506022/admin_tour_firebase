@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../res/apps_colors.dart';
 
 
-class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget(
+class LoginButtonWidget extends StatelessWidget {
+  const LoginButtonWidget(
       {super.key, required this.onPressed, required this.buttonText});
 
   final VoidCallback onPressed;

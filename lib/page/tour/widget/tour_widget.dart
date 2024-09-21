@@ -1,19 +1,17 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import '../../../controller/tour_controller.dart';
 import '../../../model/tour_model.dart';
 import '../../../res/apps_colors.dart';
 import '../../../res/constant.dart';
 import '../../../res/routes/routes_name.dart';
 import '../../../res/string_constant.dart';
+import '../../../widget/custom_button_widget.dart';
 import '../../../widget/delete_dialog_widget.dart';
 import '../../../widget/responsive.dart';
-import 'custom_button_widget.dart';
 
 class TourWidget extends StatelessWidget {
   const TourWidget({
@@ -25,7 +23,7 @@ class TourWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tourController = Get.find<TourController>();
+
     final tourModel = Provider.of<TourModel>(context);
     return Card(
       elevation: 3,
@@ -86,8 +84,9 @@ class TourWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: CustomButtonTourWidget(
-            function: () {
+          child: CustomButtonWidget(
+            function:
+            () {
               showDialog(
                 context: context,
                 builder: (context) {
@@ -97,8 +96,9 @@ class TourWidget extends StatelessWidget {
                 },
               );
             },
-            backgroundColor: AppColors.red,
             title: "Delete",
+            backgroundColor: AppColors.red,
+
             borderColor: AppColors.red,
             textColor: AppColors.white,
           ),
@@ -107,7 +107,7 @@ class TourWidget extends StatelessWidget {
           width: 20,
         ),
         Expanded(
-          child: CustomButtonTourWidget(
+          child: CustomButtonWidget(
             function: () {
               var data = {
                 StringConstant.isUpdate: true,

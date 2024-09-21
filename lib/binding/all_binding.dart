@@ -1,10 +1,16 @@
 
 import 'package:bd_tour_firebase_admin/controller/category_controller.dart';
+import 'package:bd_tour_firebase_admin/controller/guide_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/login_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/main_page_controller.dart';
+import 'package:bd_tour_firebase_admin/controller/profile_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/tour_controller.dart';
+import 'package:bd_tour_firebase_admin/controller/user_controller.dart';
+import 'package:bd_tour_firebase_admin/repository/guide_repository.dart';
 import 'package:bd_tour_firebase_admin/repository/main_repository.dart';
+import 'package:bd_tour_firebase_admin/repository/profile_repository.dart';
 import 'package:bd_tour_firebase_admin/repository/tour_repository.dart';
+import 'package:bd_tour_firebase_admin/repository/user_repository.dart';
 import 'package:get/get.dart';
 
 import '../repository/login_repository.dart';
@@ -20,6 +26,16 @@ class AllBinding extends Bindings {
     Get.lazyPut<MainRepository>(
       () => MainRepository(),
     );
+
+    Get.lazyPut<UserRepository>(
+          () => UserRepository(),
+    );
+
+    Get.lazyPut<GuideRepository>(
+          () => GuideRepository(),
+    );
+
+    Get.lazyPut<ProfileRepository>(() => ProfileRepository(),);
 
     Get.lazyPut<TourRepository>(() => TourRepository(),);
 
@@ -45,6 +61,17 @@ class AllBinding extends Bindings {
         fenix: true
     );
 
+    Get.lazyPut<UserController>(
+            () => UserController(Get.find<UserRepository>()),
+        fenix: true
+    );
+
+    Get.lazyPut<GuideController>(
+            () => GuideController(Get.find<GuideRepository>()),
+        fenix: true
+    );
+
+    Get.lazyPut<ProfileController>(() => ProfileController(Get.find<ProfileRepository>()),);
 
   }
 }

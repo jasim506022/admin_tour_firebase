@@ -1,3 +1,5 @@
+
+import 'package:bd_tour_firebase_admin/page/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,9 +9,13 @@ import '../../page/dashboard/dashboard_screen.dart';
 import '../../page/login/login_page.dart';
 import '../../page/main/main_page.dart';
 import '../../page/add_tour/add_tour_screen.dart';
+import '../../page/profile/profile_screen.dart';
 import '../../page/tour/tour_screen.dart';
 import '../../page/tour_detail/details_tour.dart';
-import '../../page/users/user_screen.dart';
+
+
+import '../../page/users_guides/guide_screen.dart';
+import '../../page/users_guides/user_screen.dart';
 import 'routes_name.dart';
 
 class Routers {
@@ -79,15 +85,23 @@ class Routers {
         name: RoutesName.searchScreen,
         builder: (context, state) {
           return MainPage(
-              child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
+               scaffoldKey: GlobalKey<ScaffoldState>(),
+              child: SearchTourScreen(), );
         }),
     GoRoute(
-        path: RoutesPath.profileScreen,
-        name: RoutesName.profileScreen,
+        path: RoutesPath.guideScreen,
+        name: RoutesName.guideScreen,
         builder: (context, state) {
           return MainPage(
-              child: TourScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
+              child: GuideScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
         }),
+        GoRoute(
+            path: RoutesPath.profileScreen,
+            name: RoutesName.profileScreen,
+            builder: (context, state) {
+              return MainPage(
+                  child: ProfileScreen(), scaffoldKey: GlobalKey<ScaffoldState>());
+            }),
 
     GoRoute(
       path: '/details/:id', // Dynamic path with :id

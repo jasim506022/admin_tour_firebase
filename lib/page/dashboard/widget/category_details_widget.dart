@@ -74,6 +74,7 @@ class CategoryDetailsWidget extends StatelessWidget {
     return SizedBox(
       height: 200, // Adjust the height of the chart as needed
       child: PieChart(
+
         chartValuesOptions: const ChartValuesOptions(
           chartValueStyle: TextStyle(
             color: Colors.black,

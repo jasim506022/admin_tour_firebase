@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import '../../../const/const.dart';
 import '../../controller/login_controller.dart';
 import '../../res/apps_function.dart';
+import '../../widget/custom_button_widget.dart';
 import '../../widget/responsive.dart';
 import '../../widget/textfieldformwidget.dart';
 import '../../widget/textform_title_widget.dart';
-import 'widget/custom_button_widget.dart';
+import 'widget/login_button_widget.dart';
+
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -138,7 +140,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   SizedBox _buildLoginButton(BuildContext context) {
     return SizedBox(
       width: mq.width,
-      child: CustomButtonWidget(
+      child: LoginButtonWidget(
         onPressed: () async {
 
           if (!_formKey.currentState!.validate()) return;

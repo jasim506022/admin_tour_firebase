@@ -28,6 +28,8 @@ class AppColors {
   static Color hintTextColor = const Color(0xffc8c8d5);
   static Color tourCardColor = const Color(0xFF2F3143);
   static const backgroundColor = Color(0xFF212332);
+  static const yellow = Colors.yellow;
+  static const deepBlue =   Color(0xFF00396A);
 
   // static  const secondaryColor = Color(0xFF2A2D3E);
 }

@@ -1,4 +1,5 @@
 
+import 'package:bd_tour_firebase_admin/res/apps_function.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -28,7 +29,7 @@ class LoadingTourWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Shimmer for the image placeholder
-              _buildShimmer(
+              AppsFunction.shimmerEffect (
                 width: mq.width,
                 height: mq.height * .3,
               ),
@@ -38,7 +39,7 @@ class LoadingTourWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildShimmer(
+                  AppsFunction.shimmerEffect(
                     height: 20,
                     width: 45,
                   ),
@@ -46,7 +47,7 @@ class LoadingTourWidget extends StatelessWidget {
                     width: ConstantData.defaultPadding,
                   ),
                   Expanded(
-                    child: _buildShimmer(
+                    child: AppsFunction.shimmerEffect(
                       height: ConstantData.defaultPadding,
                     ),
                   ),
@@ -54,29 +55,29 @@ class LoadingTourWidget extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              _buildShimmer(
+              AppsFunction.shimmerEffect(
                 height: 10,
                 width: 100,
               ),
               const SizedBox(height: 20),
-              _buildShimmer(
+              AppsFunction.shimmerEffect(
                 height: ConstantData.defaultPadding,
               ),
               const SizedBox(
                 height: 10,
               ),
-              _buildShimmer(
+              AppsFunction.shimmerEffect(
                 height: ConstantData.defaultPadding,
               ),
               const SizedBox(
                 height: 10,
               ),
-              _buildShimmer(
+              AppsFunction.shimmerEffect(
                 height: ConstantData.defaultPadding,
               ),
               const SizedBox(height: ConstantData.defaultPadding),
 
-              _buildShimmer(
+              AppsFunction.shimmerEffect(
                 height: 12,
               ),
               const SizedBox(
@@ -85,7 +86,7 @@ class LoadingTourWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: _buildShimmer(
+                    child: AppsFunction.shimmerEffect(
                       height: 40,
                       width: 100,
                       // color: Colors.grey.shade300,
@@ -93,7 +94,7 @@ class LoadingTourWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   Expanded(
-                    child: _buildShimmer(
+                    child: AppsFunction.shimmerEffect(
                       height: 40,
                       width: 100,
                       // color: Colors.grey.shade300,
@@ -108,12 +109,5 @@ class LoadingTourWidget extends StatelessWidget {
     );
   }
 
-  Container _buildShimmer({double? width, required double height}) {
-    return Container(
-      width: width ?? mq.width,
-      height: height,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: Colors.grey.shade300),
-    );
-  }
+
 }

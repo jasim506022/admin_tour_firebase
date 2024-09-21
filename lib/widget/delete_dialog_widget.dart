@@ -1,10 +1,12 @@
+import 'package:bd_tour_firebase_admin/widget/custom_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/tour_controller.dart';
 import '../model/tour_model.dart';
-import '../page/tour/widget/custom_button_widget.dart';
 import '../res/apps_colors.dart';
+
+
 
 class DialogDeleteTourWidget extends StatelessWidget {
   const DialogDeleteTourWidget({
@@ -27,7 +29,7 @@ class DialogDeleteTourWidget extends StatelessWidget {
       content: const Text(
           "This will delete this tour Permanently. You cannot undo this action"),
       actions: [
-        CustomButtonTourWidget(
+        CustomButtonWidget(
           backgroundColor: AppColors.red,
           title: "Yes",
           function: () {
@@ -37,7 +39,7 @@ class DialogDeleteTourWidget extends StatelessWidget {
           borderColor: AppColors.red,
           textColor: AppColors.white,
         ),
-        CustomButtonTourWidget(
+        CustomButtonWidget(
           backgroundColor: AppColors.secondaryColor,
           title: "No",
           function: () {

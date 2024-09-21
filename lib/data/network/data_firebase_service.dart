@@ -1,4 +1,3 @@
-import 'package:bd_tour_firebase_admin/data/network/base_firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../model/tour_model.dart';
+import 'base_firebase_service.dart';
 
 class DataFirebaseService implements BaseFirebaseService {
   @override
@@ -116,6 +116,20 @@ class DataFirebaseService implements BaseFirebaseService {
   Future<DocumentSnapshot<Map<String, dynamic>>> singleTourSnapshot(
       {required String id}) {
     return firestore.collection('tours').doc(id).get();
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> userSnapshot() {
+    return firestore.collection("user").snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> guideSnapshot() {
+    return firestore.collection("guide").snapshots();
+  }
+
+  @override
+  Future<void> signOut() async {
+    auth.signOut();
   }
 }
 

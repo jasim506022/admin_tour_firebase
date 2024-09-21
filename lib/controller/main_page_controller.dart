@@ -51,6 +51,12 @@ class MainPageController extends GetxController {
       case RoutesPath.searchScreen:
         onChangeState(currentState: SidebarItem.searchScreen.value);
         break;
+      case RoutesPath.guideScreen:
+        onChangeState(currentState: SidebarItem.guideScreen.value);
+        break;
+      case RoutesPath.userScreen:
+        onChangeState(currentState: SidebarItem.userScreen.value);
+        break;
       case RoutesPath.profileScreen:
         onChangeState(currentState: SidebarItem.profileScreen.value);
         break;

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
+import '../const/const.dart';
 import '../controller/main_page_controller.dart';
 import '../controller/save_local.dart';
 import '../data/response/app_exception.dart';
@@ -74,6 +75,15 @@ class AppsFunction {
     } else {
       throw OthersException(e.toString());
     }
+  }
+
+ static Container shimmerEffect({double? width, required double height}) {
+    return Container(
+      width: width ?? mq.width,
+      height: height,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5), color: Colors.grey.shade300),
+    );
   }
 
   static void showMyDialog(
