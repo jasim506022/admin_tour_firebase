@@ -62,6 +62,7 @@ class PersonDetailDialogWidget extends StatelessWidget {
                 const SizedBox(
                   width: ConstantData.defaultPadding,
                 ),
+                //
                 SizedBox(
                   height: 150,
                   child: Column(
