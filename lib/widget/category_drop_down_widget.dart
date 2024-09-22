@@ -2,8 +2,9 @@ import 'package:bd_tour_firebase_admin/controller/category_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../const/const.dart';
+
 import '../res/apps_colors.dart';
+import '../res/constant.dart';
 
 class CategoryDropDownWidget extends StatelessWidget {
   const CategoryDropDownWidget({
@@ -25,7 +26,7 @@ class CategoryDropDownWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColors.secondaryColor),
-        width: mq.width,
+        width:ConstantData. mq.width,
         child: DropdownButtonFormField(
           decoration: const InputDecoration(
               border: InputBorder.none),

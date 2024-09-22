@@ -33,12 +33,11 @@ class TourModel with ChangeNotifier {
       'ratting': ratting,
       'imageList': imageList,
       'category': category,
-      "isActive": isActive
+      "isActive": true
     };
   }
 
-  /// What is Factory Class
-  /// understand clearly
+
   factory TourModel.fromMap(Map<String, dynamic> map) {
     return TourModel(
       name: map['name'] != null ? map['name'] as String : null,

@@ -1,4 +1,4 @@
-
+import 'package:bd_tour_firebase_admin/res/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,14 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'binding/all_binding.dart';
-import 'const/const.dart';
+
 import 'firebase_options.dart';
 import 'res/apps_colors.dart';
 import 'res/routes/routers.dart';
 
 Future<void> main() async {
-
-  sharedPreference = await SharedPreferences.getInstance();
+  ConstantData.sharedPreference = await SharedPreferences.getInstance();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
+    ConstantData.mq = MediaQuery.of(context).size;
     return GetMaterialApp.router(
       initialBinding: AllBinding(),
       debugShowCheckedModeBanner: false,
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.backgroundColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white),
-        canvasColor: AppColors. secondaryColor,
+        canvasColor: AppColors.secondaryColor,
       ),
       // home: LogInPage(),
     );

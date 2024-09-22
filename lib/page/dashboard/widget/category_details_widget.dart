@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-import '../../../const/const.dart';
+
 import '../../../controller/tour_controller.dart';
 import '../../../res/apps_colors.dart';
 import '../../../res/constant.dart';
@@ -20,18 +21,18 @@ class CategoryDetailsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(ConstantData.defaultPadding),
       decoration:  BoxDecoration(
         color: AppColors.secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+           Text(
             "Tour Category Details",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: ConstantData.defaultPadding),
           StreamBuilder(
-            stream: tourController.tourSnapshot(context: context),
+            stream: tourController.tourSnapshot(context: context, all: "All"),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -75,9 +76,9 @@ class CategoryDetailsWidget extends StatelessWidget {
       height: 200, // Adjust the height of the chart as needed
       child: PieChart(
 
-        chartValuesOptions: const ChartValuesOptions(
+        chartValuesOptions:  ChartValuesOptions(
           chartValueStyle: TextStyle(
-            color: Colors.black,
+            color: AppColors.black,
             fontSize: 12,
             fontWeight: FontWeight.w700,
           ),

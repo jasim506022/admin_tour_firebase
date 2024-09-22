@@ -1,16 +1,22 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
+
+import '../../../controller/main_page_controller.dart';
+import '../../../controller/tour_controller.dart';
+import '../../../model/menu_model.dart';
 import '../../../model/tour_model.dart';
 import '../../../res/apps_colors.dart';
+import '../../../res/apps_function.dart';
 import '../../../res/constant.dart';
-import '../../../res/routes/routes_name.dart';
+
 import '../../../res/string_constant.dart';
+import '../../../widget/confirmation_dialog.dart';
 import '../../../widget/custom_button_widget.dart';
-import '../../../widget/delete_dialog_widget.dart';
 import '../../../widget/responsive.dart';
 
 class TourWidget extends StatelessWidget {
@@ -23,7 +29,6 @@ class TourWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final tourModel = Provider.of<TourModel>(context);
     return Card(
       elevation: 3,
@@ -32,26 +37,27 @@ class TourWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         onTap: () {
-          context.go('/details/${tourModel.id
-          }');
+          context.go('/details/${tourModel.id}');
         },
         child: Container(
-          margin: const EdgeInsets.all(15),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+          margin: const EdgeInsets.all(ConstantData.defaultPadding),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ConstantData.defaultPadding)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _imageClipRRect(tourModel, context),
               const SizedBox(
-                height: 20,
+                height: ConstantData.defaultPadding,
               ),
               _buildTitleRow(tourModel),
               const SizedBox(
-                height: 5,
+                height: 8,
               ),
               Text(
                 tourModel.address!,
-                style: const TextStyle(color: Colors.white70, fontSize: 12),
+                style: TextStyle(
+                    color: AppColors.white.withOpacity(0.7), fontSize: 13),
               ),
               const SizedBox(height: ConstantData.defaultPadding),
               if (Responsive.isDesktop(context))
@@ -59,17 +65,17 @@ class TourWidget extends StatelessWidget {
                   tourModel.details!,
                   maxLines: 3,
                   textAlign: TextAlign.justify,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.white,
                     fontSize: 13,
                   ),
                 ),
               const SizedBox(
                 height: ConstantData.defaultPadding,
               ),
-              const Divider(
+              Divider(
                 height: 1,
-                color: Colors.white60,
+                color: AppColors.white.withOpacity(0.6),
               ),
               const SizedBox(height: ConstantData.defaultPadding),
               _buildActionButton(context, tourModel),
@@ -81,24 +87,32 @@ class TourWidget extends StatelessWidget {
   }
 
   Row _buildActionButton(BuildContext context, TourModel tourModel) {
+    var tourController = Get.find<TourController>();
+    var mainController = Get.find<MainPageController>();
     return Row(
       children: [
         Expanded(
           child: CustomButtonWidget(
-            function:
-            () {
+            verticalPadding: 18,
+            function: () {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return DialogDeleteTourWidget(
-                      // tourController: tourController,
-                      tourModel: tourModel);
+                  return ConfirmationDialog(
+                    title: "Are you sure you want to delete this tour?",
+                    subtitle:
+                        "This will delete this tour Permanently. You cannot undo this action",
+                    onPress: () {
+                      tourController.deleteTour(
+                          id: tourModel.id!, context: context);
+                      Navigator.pop(context);
+                    },
+                  );
                 },
               );
             },
             title: "Delete",
             backgroundColor: AppColors.red,
-
             borderColor: AppColors.red,
             textColor: AppColors.white,
           ),
@@ -108,17 +122,20 @@ class TourWidget extends StatelessWidget {
         ),
         Expanded(
           child: CustomButtonWidget(
+            verticalPadding: 18,
             function: () {
               var data = {
                 StringConstant.isUpdate: true,
                 StringConstant.tourModel: tourModel
               };
-              context.goNamed(RoutesName.addTourScreen, extra: data);
+              AppsFunction.navigatorChange(
+                  context, mainController, SidebarItem.addTourScreen,
+                  isExtra: true, extra: data);
             },
             backgroundColor: AppColors.tourCardColor,
             title: "Edit",
             borderColor: AppColors.deepGreen,
-            textColor: Colors.white,
+            textColor: AppColors.white,
           ),
         ),
       ],
@@ -130,7 +147,8 @@ class TourWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ConstantData.defaultPadding, vertical: 3),
           decoration: BoxDecoration(
             color: AppColors.deepGreen,
             borderRadius: BorderRadius.circular(2),
@@ -138,8 +156,8 @@ class TourWidget extends StatelessWidget {
           child: Center(
             child: Text(
               "${index + 1}",
-              style: const TextStyle(
-                  color: Colors.white,
+              style: GoogleFonts.poppins(
+                  color: AppColors.white,
                   fontWeight: FontWeight.w900,
                   fontSize: 16),
             ),
@@ -151,7 +169,7 @@ class TourWidget extends StatelessWidget {
         Expanded(
           child: Text(
             tourModel.name!,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
               color: Colors.white,
               fontSize: 15,
               letterSpacing: 1.2,
@@ -177,9 +195,9 @@ class TourWidget extends StatelessWidget {
         ),
         child: FancyShimmerImage(
           imageUrl: tourModel.imageList![0],
-          width: MediaQuery.of(context).size.width,
+          width: ConstantData.mq.width,
           height:
-              Responsive.isMobile(context) ? mq.height * .23 : mq.height * .3,
+              Responsive.isMobile(context) ? ConstantData.mq.height * .23 : ConstantData.mq.height * .3,
           boxFit: BoxFit.fill,
         ));
   }

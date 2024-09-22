@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../const/const.dart';
 import '../../controller/add_tour_controller.dart';
+import '../../res/apps_colors.dart';
+import '../../res/constant.dart';
 import '../../widget/responsive.dart';
 
 class ImageListGridView extends StatelessWidget {
@@ -29,10 +30,11 @@ class ImageListGridView extends StatelessWidget {
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.white54, width: 2)),
-                  height: mq.height * .5,
+                      border: Border.all(
+                          color: AppColors.white.withOpacity(0.54), width: 2)),
+                  height: ConstantData.mq.height * .5,
                   margin: const EdgeInsets.all(15),
-                  width: mq.height * .5,
+                  width: ConstantData.mq.height * .5,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: controllers.imageXFileList[index] is String
@@ -46,13 +48,13 @@ class ImageListGridView extends StatelessWidget {
                   controllers.removeImage(index: index);
                 },
                 child: Container(
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.red),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: AppColors.red),
                   height: 30,
                   width: 30,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ),

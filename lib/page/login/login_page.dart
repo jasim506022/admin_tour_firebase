@@ -1,17 +1,16 @@
 import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
+import 'package:bd_tour_firebase_admin/res/assets/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
-import '../../../const/const.dart';
 import '../../controller/login_controller.dart';
 import '../../res/apps_function.dart';
-import '../../widget/custom_button_widget.dart';
+import '../../res/constant.dart';
 import '../../widget/responsive.dart';
 import '../../widget/textfieldformwidget.dart';
 import '../../widget/textform_title_widget.dart';
 import 'widget/login_button_widget.dart';
-
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -24,6 +23,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final LoginController loginController = Get.find();
+
   @override
   void initState() {
     loginController.navigateToNextPage(context);
@@ -43,10 +43,10 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
             child: SingleChildScrollView(
               child: SizedBox(
                   width: Responsive.isMobile(context)
-                      ? mq.width * .6
+                      ? ConstantData.mq.width * .6
                       : Responsive.isTablet(context)
-                          ? mq.width * .4
-                          : mq.width * 0.3,
+                          ? ConstantData.mq.width * .4
+                          : ConstantData.mq.width * 0.3,
                   child: Container(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                           style: GoogleFonts.poppins(
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
-                              color: Colors.red),
+                              color: AppColors.red),
                         ),
                         const SizedBox(
                           height: 10,
@@ -70,7 +70,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                           style: GoogleFonts.poppins(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
-                              color: Colors.black),
+                              color: AppColors.black),
                         ),
                         const SizedBox(
                           height: 15,
@@ -115,7 +115,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
           ),
           TextFormTitleWidget(
             textFieldWidget: TextFieldFormWidget(
-              icon: "asset/svg/password.svg",
+              icon: ImageAssets.passwordIcon,
               autofocus: false,
               isShowPassword: true,
               obscureText: true,
@@ -130,7 +130,7 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
               hintText: "enter password",
               controller: loginController.passwordTEC,
             ),
-            title: 'password'.tr,
+            title: 'password',
           ),
         ],
       ),
@@ -139,10 +139,9 @@ class _LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 
   SizedBox _buildLoginButton(BuildContext context) {
     return SizedBox(
-      width: mq.width,
+      width: ConstantData.mq.width,
       child: LoginButtonWidget(
         onPressed: () async {
-
           if (!_formKey.currentState!.validate()) return;
           loginController.loginButton(context);
         },

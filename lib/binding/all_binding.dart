@@ -1,4 +1,4 @@
-
+import 'package:bd_tour_firebase_admin/controller/add_tour_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/category_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/guide_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/login_controller.dart';
@@ -6,6 +6,7 @@ import 'package:bd_tour_firebase_admin/controller/main_page_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/profile_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/tour_controller.dart';
 import 'package:bd_tour_firebase_admin/controller/user_controller.dart';
+import 'package:bd_tour_firebase_admin/repository/add_tour_repository.dart';
 import 'package:bd_tour_firebase_admin/repository/guide_repository.dart';
 import 'package:bd_tour_firebase_admin/repository/main_repository.dart';
 import 'package:bd_tour_firebase_admin/repository/profile_repository.dart';
@@ -28,16 +29,24 @@ class AllBinding extends Bindings {
     );
 
     Get.lazyPut<UserRepository>(
-          () => UserRepository(),
+      () => UserRepository(),
     );
 
     Get.lazyPut<GuideRepository>(
-          () => GuideRepository(),
+      () => GuideRepository(),
     );
 
-    Get.lazyPut<ProfileRepository>(() => ProfileRepository(),);
+    Get.lazyPut<AddTourRepository>(
+      () => AddTourRepository(),
+    );
 
-    Get.lazyPut<TourRepository>(() => TourRepository(),);
+    Get.lazyPut<ProfileRepository>(
+      () => ProfileRepository(),
+    );
+
+    Get.lazyPut<TourRepository>(
+      () => TourRepository(),
+    );
 
     //Lazy Load the Controller  and inject Repository
     Get.lazyPut<MainPageController>(
@@ -45,33 +54,32 @@ class AllBinding extends Bindings {
     );
 
     Get.lazyPut<LoginController>(
-          () => LoginController(loginRepository: Get.find<LoginRepository>()),
+      () => LoginController(loginRepository: Get.find<LoginRepository>()),
     );
     Get.lazyPut<CategoryController>(
-          () => CategoryController(),
+      () => CategoryController(),
     );
     // Get.put(TourController(repository: Get.find<TourRepository>()));
     Get.lazyPut<TourController>(
-          () => TourController(repository: Get.find<TourRepository>()),
-      fenix: true
-    );
+        () => TourController(repository: Get.find<TourRepository>()),
+        fenix: true);
 
-    Get.lazyPut<CategoryController>(
-            () => CategoryController(),
-        fenix: true
-    );
+    Get.lazyPut<AddTourController>(
+        () => AddTourController(Get.find<AddTourRepository>()),
+        fenix: true);
+
+    Get.lazyPut<CategoryController>(() => CategoryController(), fenix: true);
 
     Get.lazyPut<UserController>(
-            () => UserController(Get.find<UserRepository>()),
-        fenix: true
-    );
+        () => UserController(Get.find<UserRepository>()),
+        fenix: true);
 
     Get.lazyPut<GuideController>(
-            () => GuideController(Get.find<GuideRepository>()),
-        fenix: true
+        () => GuideController(Get.find<GuideRepository>()),
+        fenix: true);
+
+    Get.lazyPut<ProfileController>(
+      () => ProfileController(Get.find<ProfileRepository>()),
     );
-
-    Get.lazyPut<ProfileController>(() => ProfileController(Get.find<ProfileRepository>()),);
-
   }
 }

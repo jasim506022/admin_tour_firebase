@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../const/const.dart';
+
 import '../../../res/apps_colors.dart';
 import '../../../res/constant.dart';
 
@@ -83,7 +83,7 @@ class LoadingSummeryWidget extends StatelessWidget {
   Container _buildLineShimmer() {
     return Container(
       height: 10,
-      width: mq.width,
+      width:ConstantData. mq.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5), color: Colors.grey.shade300),
     );

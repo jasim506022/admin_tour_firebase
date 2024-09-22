@@ -1,4 +1,5 @@
 
+import 'package:bd_tour_firebase_admin/res/assets/image_assets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,13 +33,13 @@ class PersonDetailDialogWidget extends StatelessWidget {
                       width: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.white, width: 2),
+                        border: Border.all(color: AppColors.white, width: 2),
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: personModel.image!.isEmpty
                               ? Image.asset(
-                                  "asset/image/image.jpg",
+                                  ImageAssets.adminImage,
                                   fit: BoxFit.fill,
                                 )
                               : Image.network(
@@ -92,17 +93,38 @@ class PersonDetailDialogWidget extends StatelessWidget {
             ElevatedButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                  backgroundColor: const Color(0xFF00396A),
+                  backgroundColor: AppColors.deepBlue,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 60, vertical: ConstantData.defaultPadding)),
               child: Text(
-                "Status",
+                personModel.status,
                 style: GoogleFonts.poppins(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 16),
               ),
+            ),
+            const SizedBox(height: ConstantData.defaultPadding,),
+
+            Align(
+              alignment: Alignment.topRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: TextButton.styleFrom(
+                    backgroundColor: AppColors.red,
+                    ),
+                child: Text(
+                  "Close",
+                  style: GoogleFonts.poppins(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14),
+                ),
+              ),
             )
+
           ],
         )
       ],
@@ -125,7 +147,7 @@ class PersonDetailDialogWidget extends StatelessWidget {
         style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFFFA113)),
+            color: AppColors.yellow),
       ),
     ]));
   }

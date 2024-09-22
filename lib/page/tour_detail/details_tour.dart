@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../const/const.dart';
+
 import '../../controller/tour_controller.dart';
 import '../../model/tour_model.dart';
 import '../../res/apps_colors.dart';
+import '../../res/constant.dart';
 
 class DetailsTourWidget extends StatelessWidget {
   const DetailsTourWidget({super.key, required this.id});
@@ -93,8 +94,8 @@ class DetailsTourWidget extends StatelessWidget {
 
   SizedBox _buildImageSection(TourModel tourModel) {
     return SizedBox(
-      width: mq.width,
-      height: mq.height,
+      width: ConstantData.mq.width,
+      height:ConstantData. mq.height,
       child: Stack(
         children: [
           Stack(
@@ -122,7 +123,7 @@ class DetailsTourWidget extends StatelessWidget {
 
   Positioned _buildCategoryRatingWidget(TourModel tourModel) {
     return Positioned(
-      top: mq.height * 0.82,
+      top:ConstantData. mq.height * 0.82,
       right: 0,
       left: 0,
       child: _buildShapeBackgroundOfWidget(
@@ -168,7 +169,7 @@ class DetailsTourWidget extends StatelessWidget {
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
           height: height,
-          width: mq.width,
+          width:ConstantData. mq.width,
           decoration: BoxDecoration(
               color: AppColors.secondaryColor,
               borderRadius: BorderRadius.circular(10)),
@@ -181,7 +182,7 @@ class DetailsTourWidget extends StatelessWidget {
     return Expanded(
         child: Container(
       margin: EdgeInsets.symmetric(
-          horizontal: mq.width * .08, vertical: mq.width * .05),
+          horizontal:ConstantData. mq.width * .08, vertical: ConstantData.mq.width * .05),
       height: 400,
       decoration: BoxDecoration(
           color: AppColors.secondaryColor,
@@ -197,7 +198,7 @@ class DetailsTourWidget extends StatelessWidget {
               child: Image.network(
                 tourModel.imageList![tourController.currentPhotoIndex.value],
                 height: 325,
-                width: mq.width,
+                width:ConstantData. mq.width,
                 fit: BoxFit.fill,
               ),
             ),
@@ -250,7 +251,7 @@ class DetailsTourWidget extends StatelessWidget {
     return Expanded(
         child: Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mq.width * .05),
+        padding: EdgeInsets.symmetric(horizontal:ConstantData. mq.width * .05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -284,8 +285,8 @@ class DetailsTourWidget extends StatelessWidget {
 
   Container _buildOverlay() {
     return Container(
-      width: mq.width,
-      height: mq.height * 0.9,
+      width: ConstantData.mq.width,
+      height: ConstantData.mq.height * 0.9,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.8),
       ),
@@ -296,8 +297,8 @@ class DetailsTourWidget extends StatelessWidget {
     var tourController = Get.find<TourController>();
     return Obx(
       () => Container(
-        width: mq.width,
-        height: mq.height * 0.9,
+        width: ConstantData.mq.width,
+        height: ConstantData.mq.height * 0.9,
         decoration: BoxDecoration(
             image: DecorationImage(
           image: NetworkImage(

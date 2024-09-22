@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../const/const.dart';
 import '../res/apps_colors.dart';
 
 class AlertDialogWidget extends StatelessWidget {

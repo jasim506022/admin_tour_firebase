@@ -2,7 +2,7 @@ import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-import '../const/const.dart';
+
 
 class SummerModel {
   final String title, totalStorage;

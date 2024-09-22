@@ -1,4 +1,4 @@
-import '../const/const.dart';
+import '../res/constant.dart';
 import '../res/string_constant.dart';
 
 class SaveDataLocalStorage {
@@ -6,16 +6,15 @@ class SaveDataLocalStorage {
     List<String> categoryList = dataList.map((e) => e.toString()).toList();
     List<String> allCategoryList = ["All", ...categoryList];
 
-    await sharedPreference!
+    await ConstantData.sharedPreference!
         .setStringList(StringConstant.categoriesSharePre, categoryList);
-    await sharedPreference!
+    await ConstantData.sharedPreference!
         .setStringList(StringConstant.allCategoriesSharePre, allCategoryList);
   }
 
   static Future<void> saveCurrentRouthPath(String currentPath) async {
-    await sharedPreference!
+    await ConstantData.sharedPreference!
         .setString(StringConstant.currentPathSharePre, currentPath);
-    // await sharedPreference!.setStringList(StringConstant.allCategoriesSharePre, allCategoryList);
   }
 }
 

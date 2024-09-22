@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../const/const.dart';
 import '../data/response/app_exception.dart';
 import '../model/menu_model.dart';
 import '../repository/main_repository.dart';
 import '../res/apps_function.dart';
+import '../res/constant.dart';
 import '../res/routes/routes_name.dart';
 import '../res/string_constant.dart';
 import 'save_local.dart';
@@ -67,19 +67,19 @@ class MainPageController extends GetxController {
   }
 
   Future<void> updateLocalData(BuildContext context) async {
-    final categories =
-        sharedPreference!.getStringList(StringConstant.categoriesSharePre);
-    final allCategories =
-        sharedPreference!.getStringList(StringConstant.allCategoriesSharePre);
+    final categories = ConstantData.sharedPreference!
+        .getStringList(StringConstant.categoriesSharePre);
+    final allCategories = ConstantData.sharedPreference!
+        .getStringList(StringConstant.allCategoriesSharePre);
     if (categories == null && allCategories == null) {
       try {
         isLoading.value = true;
-
         var firestore = await mainRepository.getCategories();
         List<dynamic> fetchedCategories = firestore.data()?["categories"] ?? [];
         SaveDataLocalStorage.saveCategories(fetchedCategories);
         isLoading.value = false;
       } catch (e) {
+        if (!context.mounted) return;
         AppsFunction.showSnackBar(context, e.toString());
       } finally {
         isLoading.value = false;

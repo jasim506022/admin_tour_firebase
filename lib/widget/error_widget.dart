@@ -1,8 +1,8 @@
 import 'package:bd_tour_firebase_admin/res/apps_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../const/const.dart';
-import '../../../res/assets/image_assets.dart';
+import '../res/assets/image_assets.dart';
+import '../res/constant.dart';
 
 class FirebaseErrorWidget extends StatelessWidget {
   const FirebaseErrorWidget({
@@ -19,13 +19,13 @@ class FirebaseErrorWidget extends StatelessWidget {
         Center(
             child: Image.asset(
           ImageAssets.imageError,
-          height: mq.height * .9,
-          width: mq.width * .9,
+          height:ConstantData. mq.height * .9,
+          width:ConstantData. mq.width * .9,
         )),
         Positioned(
-          left: mq.width * .36,
-          top: mq.height * .24,
-          right: mq.width * .23,
+          left:ConstantData. mq.width * .36,
+          top:ConstantData. mq.height * .24,
+          right: ConstantData. mq.width * .23,
           child: Text(
             title,
             style: TextStyle(

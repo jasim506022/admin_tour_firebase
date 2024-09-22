@@ -3,9 +3,9 @@ import 'package:bd_tour_firebase_admin/res/apps_function.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../const/const.dart';
-import '../../../res/apps_colors.dart';
-import '../../../res/constant.dart';
+
+import '../res/apps_colors.dart';
+import '../res/constant.dart';
 
 class LoadingTourWidget extends StatelessWidget {
   const LoadingTourWidget({super.key});
@@ -30,8 +30,8 @@ class LoadingTourWidget extends StatelessWidget {
             children: [
               // Shimmer for the image placeholder
               AppsFunction.shimmerEffect (
-                width: mq.width,
-                height: mq.height * .3,
+                width: ConstantData. mq.width,
+                height: ConstantData. mq.height * .3,
               ),
 
               const SizedBox(height: 20),

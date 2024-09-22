@@ -9,7 +9,7 @@ import '../../model/user_model.dart';
 import '../../res/apps_colors.dart';
 import '../../res/constant.dart';
 import '../../widget/search_widget_text_field.dart';
-import '../tour/widget/error_widget.dart';
+import '../../widget/error_widget.dart';
 
 import '../users_guides/widget/loading_user_widget.dart';
 import 'widget/person_list_builder_widget.dart';

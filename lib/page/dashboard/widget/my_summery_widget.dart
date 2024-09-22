@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../const/const.dart';
+
 import '../../../controller/main_page_controller.dart';
 import '../../../model/menu_model.dart';
 import '../../../res/apps_function.dart';
@@ -59,11 +59,11 @@ class MySummeryWidget extends StatelessWidget {
         ),
         Responsive(
             mobile: SummeryGridView(
-                crossAxisCount: mq.width < 650 ? 2 : 4,
-                childAspectRatio: mq.width < 650 && mq.width > 350 ? 1.3 : 1),
+                crossAxisCount:ConstantData. mq.width < 650 ? 2 : 4,
+                childAspectRatio: ConstantData.mq.width < 650 &&ConstantData. mq.width > 350 ? 1.3 : 1),
             tablet: const SummeryGridView(),
             desktop:
-                SummeryGridView(childAspectRatio: mq.width < 1400 ? 1.1 : 1.4)),
+                SummeryGridView(childAspectRatio: ConstantData.mq.width < 1400 ? 1.1 : 1.4)),
       ],
     );
   }

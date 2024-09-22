@@ -26,7 +26,7 @@ class SummeryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(ConstantData.defaultPadding),
       decoration:  BoxDecoration(
           color:AppColors. secondaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

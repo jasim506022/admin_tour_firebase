@@ -1,11 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../const/const.dart';
+
 import '../../../controller/tour_controller.dart';
 
 import '../../../model/tour_model.dart';
 import '../../../res/apps_colors.dart';
+import '../../../res/apps_function.dart';
 import '../../../res/constant.dart';
 
 class MyPopularTourWidget extends StatelessWidget {
@@ -63,7 +65,7 @@ class MyPopularTourWidget extends StatelessWidget {
                                 color: AppColors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14),
-                            columns: columns,
+                            columns: AppsFunction. columns(),
                             rows: rows,
                           ),
                         ),

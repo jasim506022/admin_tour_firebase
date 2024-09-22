@@ -7,13 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
-import '../const/const.dart';
+
 import '../controller/main_page_controller.dart';
 import '../controller/save_local.dart';
 import '../data/response/app_exception.dart';
 import '../model/menu_model.dart';
 import '../widget/alert_dialog_widget.dart';
 import 'apps_colors.dart';
+import 'constant.dart';
 
 class AppsFunction {
   static void flutterToast({required String title}) {
@@ -33,9 +34,18 @@ class AppsFunction {
     return regex.hasMatch(email);
   }
 
-  static void navigatorChange(BuildContext context,
-      MainPageController controller, SidebarItem sidebarItem) {
-    context.goNamed(sidebarItem.value);
+  static void navigatorChange(
+    BuildContext context,
+    MainPageController controller,
+    SidebarItem sidebarItem, {
+    Object? extra,
+    bool isExtra = false,
+  }) {
+    if (extra != null && isExtra) {
+      context.goNamed(sidebarItem.value, extra: extra);
+    } else {
+      context.goNamed(sidebarItem.value);
+    }
     controller.onChangeState(currentState: sidebarItem.value);
     SaveDataLocalStorage.saveCurrentRouthPath(sidebarItem.pathName);
   }
@@ -77,14 +87,29 @@ class AppsFunction {
     }
   }
 
- static Container shimmerEffect({double? width, required double height}) {
+  static Container shimmerEffect({double? width, required double height}) {
     return Container(
-      width: width ?? mq.width,
+      width: width ??ConstantData. mq.width,
       height: height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5), color: Colors.grey.shade300),
     );
   }
+
+ static List<DataColumn> columns() => [
+    const DataColumn(
+      label: Text("Photo"),
+    ),
+    const DataColumn(
+      label: Text("Tour Name"),
+    ),
+    const DataColumn(
+      label: Text("Price"),
+    ),
+    const DataColumn(
+      label: Text("Location"),
+    ),
+  ];
 
   static void showMyDialog(
       {required BuildContext context,

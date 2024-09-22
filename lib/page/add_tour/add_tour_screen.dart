@@ -1,12 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../const/const.dart';
 
 import '../../controller/add_tour_controller.dart';
 import '../../model/tour_model.dart';
 import '../../res/apps_colors.dart';
+import '../../res/constant.dart';
 import '../../widget/category_drop_down_widget.dart';
 import '../../widget/responsive.dart';
 import '../../widget/textfieldformwidget.dart';
@@ -32,7 +33,6 @@ class _AddTourScreenState extends State<AddTourScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     if (widget.data != null) {
       isUpdate = widget.data!["isUpdate"];
     }
@@ -40,6 +40,9 @@ class _AddTourScreenState extends State<AddTourScreen> {
     if (isUpdate) {
       tourModel = widget.data!["tourModel"];
       controllers.initializeTourFields(tourModel);
+
+    }else{
+      controllers.clearInputFields();
     }
     super.initState();
   }
@@ -49,7 +52,8 @@ class _AddTourScreenState extends State<AddTourScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: mq.width * .037),
+          padding:
+              EdgeInsets.symmetric(horizontal: ConstantData.mq.width * .037),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -74,9 +78,9 @@ class _AddTourScreenState extends State<AddTourScreen> {
                   onPressed: () async {
                     controllers.getImageFromDevices();
                   },
-                  child: const Text(
+                  child:  Text(
                     "Upload Image",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppColors.white),
                   )),
               const SizedBox(
                 height: 20,
@@ -124,9 +128,10 @@ class _AddTourScreenState extends State<AddTourScreen> {
         return Container(
           height: imageCounter == 0 ? 20 : containHeight,
           decoration: BoxDecoration(
-              color: AppColors.secondaryColor, borderRadius: BorderRadius.circular(10)),
+              color: AppColors.secondaryColor,
+              borderRadius: BorderRadius.circular(10)),
           child: imageCounter == 0
-              ? Container(height: 10, color:AppColors. secondaryColor)
+              ? Container(height: 10, color: AppColors.secondaryColor)
               : const ImageListGridView(),
         );
       },

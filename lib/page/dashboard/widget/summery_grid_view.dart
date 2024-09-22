@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../const/const.dart';
+
 import '../../../controller/main_page_controller.dart';
 import '../../../res/constant.dart';
 import '../loading/loading_summery_widget.dart';
@@ -65,4 +65,4 @@ class SummeryGridView extends StatelessWidget {
   }
 }
 
-final List<String> collections = ['tours', 'user'];
+final List<String> collections = ['tours', 'user', 'guide'];

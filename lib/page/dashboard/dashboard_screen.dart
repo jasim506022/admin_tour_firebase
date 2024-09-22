@@ -1,14 +1,12 @@
 
-import 'package:bd_tour_firebase_admin/res/constant.dart';
 import 'package:flutter/material.dart';
 
-import '../../const/const.dart';
+import '../../res/constant.dart';
 import '../../widget/responsive.dart';
 import 'widget/category_details_widget.dart';
 import 'widget/dashboard_header_widget.dart';
 import 'widget/my_popular_tour_list_widget.dart';
 import 'widget/my_summery_widget.dart';
-
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key, required this.scaffoldKey});
@@ -20,15 +18,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
-
-  final dataMap = <String, double>{
-    "Flutter": 5,
-    "React": 3,
-    "Xamarin": 2,
-    "Ionic": 2,
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +59,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
-
-
-

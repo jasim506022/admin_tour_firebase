@@ -1,19 +1,21 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../data/response/app_exception.dart';
 import '../model/tour_model.dart';
 import '../repository/add_tour_repository.dart';
 import '../res/apps_function.dart';
 import 'category_controller.dart';
 import 'loading_controller.dart';
-import 'main_page_controller.dart';
 
 class AddTourController extends GetxController {
-  final _addTourRepository = AddTourRepository();
+  AddTourRepository addTourRepository;
+
+  AddTourController(this.addTourRepository);
+
   var loadingController = Get.put(LoadingController());
-  final controller = Get.find<MainPageController>();
   var categoryController = Get.find<CategoryController>();
 
   var tourId = "".obs;
@@ -39,7 +41,7 @@ class AddTourController extends GetxController {
   }
 
   Future<void> getImageFromDevices() async {
-    imageXFileList.addAll(await _addTourRepository.getImageFromDevices());
+    imageXFileList.addAll(await addTourRepository.getImageFromDevices());
   }
 
   Future<void> saveToru(
@@ -59,24 +61,23 @@ class AddTourController extends GetxController {
 
       List<XFile> xFileList = _extractXFilesFromList(imageXFileList);
 
-      // imageXFileList.whereType<XFile>().toList();
       List<String> existingImageUrls =
           _extractExistingImageUrls(imageXFileList, isUpdate);
 
       var uploadImageListUrl =
-          await _addTourRepository.uploadImageStorage(imageList: xFileList);
+          await addTourRepository.uploadImageStorage(imageList: xFileList);
 
       if (isUpdate) {
         uploadImageListUrl.addAll(existingImageUrls);
       }
       TourModel tourModel = _buildTourModel(uploadImageListUrl);
       if (isUpdate) {
-        await _addTourRepository.updateTour(tourModel: tourModel);
+        await addTourRepository.updateTour(tourModel: tourModel);
       } else {
-        _addTourRepository.uploadTourSnapshot(tourModel: tourModel);
+        addTourRepository.uploadTourSnapshot(tourModel: tourModel);
       }
 
-      _clearInputFields();
+      clearInputFields();
       if (!context.mounted) return;
       Navigator.pop(context);
       AppsFunction.showMyDialog(
@@ -88,8 +89,8 @@ class AddTourController extends GetxController {
         loadingController.setLoading(isLoading: false);
       });
     } catch (e) {
-      if (kDebugMode) {
-        print(e);
+      if (e is AppException) {
+        AppsFunction.showSnackBar(context, e.toString());
       }
     }
   }
@@ -160,7 +161,7 @@ class AddTourController extends GetxController {
     super.dispose();
   }
 
-  void _clearInputFields() {
+  void clearInputFields() {
     imageXFileList.clear();
     titleController.clear();
     addressController.clear();

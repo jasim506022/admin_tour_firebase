@@ -10,10 +10,10 @@ enum SidebarItem {
       pathName: RoutesPath.dashboardScreen),
   addTourScreen(
       value: 'Add Tour',
-      iconData: Icons.business,
+      iconData: Icons.add_circle_outline,
       pathName: RoutesPath.addTourScreen),
   tourScreen(
-      value: 'Tour', iconData: Icons.group, pathName: RoutesPath.tourScreen),
+      value: 'Tour', iconData: Icons.tour, pathName: RoutesPath.tourScreen),
   searchScreen(
       value: 'Search',
       iconData: Icons.search,

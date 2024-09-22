@@ -14,7 +14,7 @@ class AppColors {
 // State Colors
   static Color lightBlack = const Color(0xff999999);
 
-  static Color lightwhite = const Color(0xfff6f8f8);
+  static Color lightWhite = const Color(0xfff6f8f8);
 
 //
   static Color searchColor = const Color(0xfff3f3f4);

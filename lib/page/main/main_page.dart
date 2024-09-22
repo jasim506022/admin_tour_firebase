@@ -1,10 +1,11 @@
-import 'package:bd_tour_firebase_admin/const/const.dart';
-import 'package:bd_tour_firebase_admin/controller/main_page_controller.dart';
-import 'package:bd_tour_firebase_admin/res/routes/routes_name.dart';
-import 'package:bd_tour_firebase_admin/res/string_constant.dart';
+import 'package:bd_tour_firebase_admin/res/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../controller/main_page_controller.dart';
 import '../../res/apps_colors.dart';
+import '../../res/routes/routes_name.dart';
+import '../../res/string_constant.dart';
 import '../../widget/responsive.dart';
 
 import 'widget/side_menu_widget.dart';
@@ -25,9 +26,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     mainController.updateLocalData(context);
-    mainController.updateStateBasedOnRoute(
-        sharedPreference!.getString(StringConstant.currentPathSharePre) ??
-            RoutesPath.dashboardScreen);
+    mainController.updateStateBasedOnRoute(ConstantData.sharedPreference!
+            .getString(StringConstant.currentPathSharePre) ??
+        RoutesPath.dashboardScreen);
     super.initState();
   }
 
@@ -35,10 +36,12 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (mainController.isLoading.value) {
-        return Center(
-          child: CircularProgressIndicator(
-            color: AppColors.white,
-            strokeWidth: 4,
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(
+              color: AppColors.white,
+              strokeWidth: 4,
+            ),
           ),
         );
       } else {

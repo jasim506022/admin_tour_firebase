@@ -8,13 +8,16 @@ class CustomButtonWidget extends StatelessWidget {
       required this.title,
       required this.backgroundColor,
       required this.borderColor,
-      required this.textColor});
+      required this.textColor, this.verticalPadding = 12,
+
+      });
 
   final VoidCallback function;
   final String title;
   final Color backgroundColor;
   final Color borderColor;
   final Color textColor;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class CustomButtonWidget extends StatelessWidget {
           backgroundColor: backgroundColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+          padding:  EdgeInsets.symmetric(horizontal: 25, vertical: verticalPadding!),
         ),
         onPressed: function,
         child: Text(title,

@@ -1,19 +1,16 @@
-import 'package:bd_tour_firebase_admin/res/apps_function.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../const/const.dart';
 import '../../../controller/main_page_controller.dart';
-import '../../../controller/save_local.dart';
+import '../../../controller/profile_controller.dart';
 import '../../../model/menu_model.dart';
 import '../../../res/apps_colors.dart';
+import '../../../res/apps_function.dart';
 import '../../../res/constant.dart';
-import '../../../res/routes/routes_name.dart';
+import '../../../widget/confirmation_dialog.dart';
 import '../../../widget/responsive.dart';
 
 class DashboardHeaderWidget extends StatelessWidget {
@@ -29,7 +26,6 @@ class DashboardHeaderWidget extends StatelessWidget {
     final controller = Get.find<MainPageController>();
     return Row(
       children: [
-        // Menu Icon for when Screen size is not Desktop
         if (!Responsive.isDesktop(context))
           IconButton(
               icon: const Icon(Icons.menu),
@@ -46,7 +42,7 @@ class DashboardHeaderWidget extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
-                  letterSpacing: 1.5)),
+                  letterSpacing: 1.2)),
 
         if (!Responsive.isMobile(context))
           Spacer(
@@ -66,6 +62,7 @@ class DashboardHeaderWidget extends StatelessWidget {
   }
 
   Container _buildAbout(BuildContext context, MainPageController controller) {
+    var profileController = Get.find<ProfileController>();
     return Container(
       height: 60,
       width: 250,
@@ -73,7 +70,8 @@ class DashboardHeaderWidget extends StatelessWidget {
         left: ConstantData.defaultPadding,
       ),
       margin: const EdgeInsets.symmetric(
-          horizontal: ConstantData.defaultPadding, vertical: ConstantData.defaultPadding / 2),
+          horizontal: ConstantData.defaultPadding,
+          vertical: ConstantData.defaultPadding / 2),
       decoration: BoxDecoration(
           color: AppColors.secondaryColor,
           border: Border.all(color: Colors.white10),
@@ -81,15 +79,24 @@ class DashboardHeaderWidget extends StatelessWidget {
       child: Row(
         children: [
           PopupMenuButton<String>(
-            color:AppColors. secondaryColor,
+            color: AppColors.secondaryColor,
             onSelected: (value) {
               if (value == 'sign_out') {
-                FirebaseAuth.instance.signOut();
-                GoRouter.of(context)
-                    .pushReplacementNamed(RoutesName.initialRoute);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return ConfirmationDialog(
+                      onPress: () {
+                        profileController.signOut(context);
+                      },
+                      title: 'Sign Out',
+                      subtitle: 'Are you sure you want to sign out?',
+                    );
+                  },
+                );
               } else if (value == 'profile') {
                 AppsFunction.navigatorChange(
-                    context, controller, SidebarItem.addTourScreen);
+                    context, controller, SidebarItem.profileScreen);
               }
             },
             itemBuilder: (context) => [
@@ -117,7 +124,8 @@ class DashboardHeaderWidget extends StatelessWidget {
                 ),
               )),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: ConstantData.defaultPadding / 2),
+            padding: EdgeInsets.symmetric(
+                horizontal: ConstantData.defaultPadding / 2),
             child: Text("Md Jasim Uddin"),
           ),
         ],
@@ -157,20 +165,21 @@ class DashboardHeaderWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Text(
+          Text(
             "Search Here",
-            style: TextStyle(color: Colors.white60),
+            style:
+                GoogleFonts.poppins(color: AppColors.white.withOpacity(0.60)),
           ),
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(ConstantData.defaultPadding * 0.75),
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
                 color: AppColors.blueColor,
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
-            child: const Icon(
+            child: Icon(
               Icons.search,
               size: 20,
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ),
         ],

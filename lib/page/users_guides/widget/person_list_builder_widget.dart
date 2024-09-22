@@ -7,7 +7,7 @@ import '../../../controller/guide_controller.dart';
 import '../../../controller/user_controller.dart';
 import '../../../model/guide_model.dart';
 import '../../../model/user_model.dart';
-import '../../tour/widget/error_widget.dart';
+import '../../../widget/error_widget.dart';
 import 'loading_user_widget.dart';
 import 'person_row_widget.dart';
 
