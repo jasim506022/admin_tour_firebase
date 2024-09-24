@@ -1,4 +1,5 @@
 import 'package:bd_tour_firebase_admin/controller/category_controller.dart';
+import 'package:bd_tour_firebase_admin/controller/tour_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,15 +11,19 @@ class CategoryDropDownWidget extends StatelessWidget {
   const CategoryDropDownWidget({
     super.key,
     required this.margin,
-    this.isAll = true,
+    this.isAll = true, this.onchange, this.isSearch=false,
   });
+
 
   final double margin;
   final bool? isAll;
+  final bool? isSearch;
+  final void Function(String?)? onchange;
 
   @override
   Widget build(BuildContext context) {
-    var categoryController = Get.put(CategoryController());
+    var categoryController = Get.find<CategoryController>();
+    var tourController = Get.find<TourController>();
     return Obx(
       () => Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -38,6 +43,7 @@ class CategoryDropDownWidget extends StatelessWidget {
           items: isAll!
               ? categoryController.allCategories.map(
                   (category) {
+
                     return DropdownMenuItem(
                       value: category,
                       child: Text(category),
@@ -52,9 +58,10 @@ class CategoryDropDownWidget extends StatelessWidget {
                     );
                   },
                 ).toList(),
-          onChanged: (value) {
-            isAll!
-                ? categoryController.setAllCategory(category: value.toString())
+          onChanged: isSearch!? onchange:
+              (value) {
+isAll!
+                 ? categoryController.setAllCategory(category: value.toString())
                 : categoryController.setCategory(category: value.toString());
           },
         ),

@@ -70,6 +70,7 @@ class AllBinding extends Bindings {
 
     Get.lazyPut<CategoryController>(() => CategoryController(), fenix: true);
 
+
     Get.lazyPut<UserController>(
         () => UserController(Get.find<UserRepository>()),
         fenix: true);

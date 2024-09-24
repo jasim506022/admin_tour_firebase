@@ -1,15 +1,15 @@
 
-import 'package:bd_tour_firebase_admin/data/response/app_exception.dart';
-import 'package:bd_tour_firebase_admin/repository/tour_repository.dart';
-import 'package:bd_tour_firebase_admin/res/apps_function.dart';
-import 'package:bd_tour_firebase_admin/res/string_constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import '../data/response/app_exception.dart';
+import '../repository/tour_repository.dart';
+import '../res/apps_function.dart';
 import '../res/constant.dart';
+import '../res/string_constant.dart';
 import 'category_controller.dart';
 
 class TourController extends GetxController {
@@ -28,10 +28,10 @@ class TourController extends GetxController {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> tourSnapshot(
-      {required BuildContext context, String? all }) {
+      {required BuildContext context, String? all}) {
     try {
       return repository.tourSnapshot(
-          category: all?? categoryController.allSelectedCategory.value);
+          category: all ?? categoryController.allSelectedCategory.value);
     } catch (e) {
       if (e is AppException) {
         AppsFunction.showSnackBar(context, e.message!);
@@ -60,8 +60,8 @@ class TourController extends GetxController {
   }
 
   void convertListToMap() {
-    var categoryList =
-    ConstantData.   sharedPreference!.getStringList(StringConstant.categoriesSharePre);
+    var categoryList = ConstantData.sharedPreference!
+        .getStringList(StringConstant.categoriesSharePre);
     if (categoryList != null) {
       categoryDataMap = {for (var category in categoryList) category: 0.0};
       categoryActiveDataMap = {

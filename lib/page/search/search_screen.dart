@@ -1,13 +1,13 @@
-import 'package:bd_tour_firebase_admin/controller/search_controller.dart';
-import 'package:bd_tour_firebase_admin/widget/search_widget_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/search_controller.dart';
 import '../../model/tour_model.dart';
 import '../../res/constant.dart';
 import '../../widget/category_drop_down_widget.dart';
 import '../../widget/grid_tour_list_widget.dart';
 import '../../widget/error_widget.dart';
 import '../../widget/loading_tour_list_widget.dart';
+import '../../widget/search_widget_text_field.dart';
 
 class SearchTourScreen extends StatelessWidget {
   const SearchTourScreen({super.key});
@@ -28,8 +28,16 @@ class SearchTourScreen extends StatelessWidget {
         const SizedBox(
           height: ConstantData.defaultPadding,
         ),
-        const CategoryDropDownWidget(
+        CategoryDropDownWidget(
+          isSearch: true,
           margin: ConstantData.defaultPadding,
+          onchange: (category) {
+            searchController.filterByCategory(category!);
+            searchController.searchTourTextTEC.text = "";
+            searchController.allTourList.value = [];
+            searchController.searchTourList.value = [];
+            searchController.isSearch.value = false;
+          },
         ),
         const SizedBox(
           height: ConstantData.defaultPadding,
@@ -62,6 +70,7 @@ class SearchTourScreen extends StatelessWidget {
                       .toList();
                   return GridTourListWidget(
                     searchController: searchController,
+                    isSearch: true,
                   );
                 }
                 return const LoadingTourWidgetList();
@@ -72,6 +81,4 @@ class SearchTourScreen extends StatelessWidget {
       ],
     ));
   }
-
-
 }

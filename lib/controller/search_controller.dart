@@ -1,13 +1,15 @@
-import 'package:bd_tour_firebase_admin/controller/tour_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/tour_model.dart';
+import 'category_controller.dart';
+import 'tour_controller.dart';
 
 class SearchControllers extends GetxController {
   TextEditingController searchTourTextTEC = TextEditingController();
   var tourController = Get.find<TourController>();
-
+  var categoryController = Get.find<CategoryController>();
   var searchTourList = <TourModel>[].obs;
 
   var allTourList = <TourModel>[].obs;
@@ -23,5 +25,11 @@ class SearchControllers extends GetxController {
       }
     }
     isSearch.value = true;
+  }
+
+  void filterByCategory(String category) {
+    categoryController.setAllCategory(category: category);
+
+    filterUser(searchTourTextTEC.text);
   }
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/tour_controller.dart';
@@ -8,7 +6,6 @@ import '../../widget/category_drop_down_widget.dart';
 import '../../widget/grid_tour_list_widget.dart';
 import '../../widget/error_widget.dart';
 import '../../widget/loading_tour_list_widget.dart';
-
 
 class TourScreen extends StatelessWidget {
   const TourScreen({super.key});
@@ -48,9 +45,8 @@ class TourScreen extends StatelessWidget {
                   );
                 }
                 if (snapshot.hasData) {
-                  return  GridTourListWidget(
-                    isSearch: true,
-                    snapshot: snapshot ,
+                  return GridTourListWidget(
+                    snapshot: snapshot,
                   );
                 }
                 return const LoadingTourWidgetList();
@@ -61,5 +57,4 @@ class TourScreen extends StatelessWidget {
       ],
     ));
   }
-
 }
