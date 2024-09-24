@@ -43,4 +43,4 @@ class MyApp extends StatelessWidget {
   }
 }
 //D:\Flutter Project 2024\bd_tour_admin
-// `flutter run -d chrome --web-renderer html`
+// flutter run -d chrome --web-renderer html
